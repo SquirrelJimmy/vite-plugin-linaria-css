@@ -1,0 +1,20 @@
+{
+  "exclude": [
+    "node_modules",
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "jsx": "react",
+    "lib": ["es6", "dom"],
+    "module": "es6",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "noEmit": true
+  }
+}
