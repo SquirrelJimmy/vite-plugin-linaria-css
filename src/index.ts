@@ -39,7 +39,7 @@
    const cssLookup: { [key: string]: string } = {};
    const root = workspaceRoot  || process.cwd();
    return {
-     name: "vite-plugin-linaria",
+     name: "vite-plugin-linaria-style",
      load(id: string) {
        return cssLookup[id];
      },

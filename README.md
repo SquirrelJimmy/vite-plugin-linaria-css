@@ -1,4 +1,4 @@
-# vite-plugin-linaria
+# vite-plugin-linaria-style
 A Vite plugin for Linaria, like `@linaria/webpack-loader`
 
 ### 📖 Please refer to the [GitHub](https://github.com/callstack/linaria#readme) for full linaria documentation.
@@ -6,19 +6,19 @@ A Vite plugin for Linaria, like `@linaria/webpack-loader`
 ## Installation
 
 ```sh
-npm install vite-plugin-linaria-css
+npm install vite-plugin-linaria-style
 ```
 
 or
 
 ```sh
-yarn add vite-plugin-linaria-css
+yarn add vite-plugin-linaria-style
 ```
 
 ## Simple Configure
 
 ```ts
-import linaria from 'vite-plugin-linaria';
+import linaria from 'vite-plugin-linaria-style';
 export default defineConfig({
   plugins: [
     linaria({
