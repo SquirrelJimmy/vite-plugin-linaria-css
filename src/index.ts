@@ -36,20 +36,20 @@
    ...rest
  }: RollupPluginOptions = {}): Plugin {
    const filter = createFilter(include, exclude);
-   const cssLookup: { [key: string]: string } = {};
+   const cssLookup = new Map<string, string>();
    const root = workspaceRoot  || process.cwd();
    return {
-     name: "vite-plugin-linaria-style",
+     name: "vite-plugin-linaria-styled",
      load(id: string) {
-       return cssLookup[id];
+       return cssLookup.get(id);
      },
      resolveId(importee: string) {      
-       if (importee in cssLookup) return importee;
+       if (cssLookup.has(importee)) return importee;
      },
      // @ts-ignore
      transform(code: string, id: string) {
        // Do not transform ignored and generated files
-       if (!filter(id) || id in cssLookup) return;
+       if (!filter(id) || cssLookup.has(id)) return;      
        EvalCache.clearForFile(id);
        const result = transform(code, {
          filename: id,
@@ -90,8 +90,9 @@
          mkdirp.sync(path.dirname(outputFilename));
          fs.writeFileSync(outputFilename, cssText);
        }
-       cssLookup[outputFilename] = cssText;      
+       cssLookup.set(outputFilename, cssText);
        result.code += `\nimport ${JSON.stringify(outputFilename)};\n`;
+       
        /* eslint-disable-next-line consistent-return */
        return { code: result.code, map: result.sourceMap };
      },

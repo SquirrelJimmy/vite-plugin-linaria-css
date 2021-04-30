@@ -948,6 +948,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/estree@^0.0.45":
+  version "0.0.45"
+  resolved "https://registry.nlark.com/@types/estree/download/@types/estree-0.0.45.tgz?cache=0&sync_timestamp=1618846908316&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Festree%2Fdownload%2F%40types%2Festree-0.0.45.tgz#e9387572998e5ecdac221950dab3e8c3b16af884"
+  integrity sha1-6Th1cpmOXs2sIhlQ2rPow7Fq+IQ=
+
 "@types/mkdirp@^1.0.1":
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/@types/mkdirp/download/@types/mkdirp-1.0.1.tgz?cache=0&sync_timestamp=1613379620218&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fmkdirp%2Fdownload%2F%40types%2Fmkdirp-1.0.1.tgz#0930b948914a78587de35458b86c907b6e98bbf6"
@@ -2359,6 +2364,11 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+typescript@^3.9.7:
+  version "3.9.9"
+  resolved "https://registry.nlark.com/typescript/download/typescript-3.9.9.tgz#e69905c54bc0681d0518bd4d587cc6f2d0b1a674"
+  integrity sha1-5pkFxUvAaB0FGL1NWHzG8tCxpnQ=
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
