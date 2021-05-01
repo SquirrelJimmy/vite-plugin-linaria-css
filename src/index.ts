@@ -6,7 +6,7 @@
  import fs from "fs";
  import path from "path";
  import { Plugin } from 'vite';
- import { createFilter } from "@rollup/pluginutils";
+ import { createFilter, FilterPattern } from "@rollup/pluginutils";
  import type { PluginOptions, Preprocessor } from "@linaria/babel-preset";
  import mkdirp from 'mkdirp';
  import normalize from 'normalize-path';
@@ -16,8 +16,8 @@
  const workspaceRoot = findYarnWorkspaceRoot();
  
  type RollupPluginOptions = {
-   include?: string | string[];
-   exclude?: string | string[];
+   include?: FilterPattern;
+   exclude?: FilterPattern;
    sourceMap?: boolean;
    preprocessor?: Preprocessor;
    extension?: string;
@@ -35,9 +35,18 @@
    extension = '.linaria.css',
    ...rest
  }: RollupPluginOptions = {}): Plugin {
-   const filter = createFilter(include, exclude);
-   const cssLookup = new Map<string, string>();
-   const root = workspaceRoot  || process.cwd();
+    const filter = createFilter(include, exclude);
+    const fileExtensionReg = /\.(js|ts)x?$/;
+    const cssLookup = new Map<string, string>();
+    const root = workspaceRoot  || process.cwd();
+    const cacheDirPath =  normalize(
+      path.isAbsolute(cacheDirectory)
+          ? cacheDirectory
+          : path.join(process.cwd(), cacheDirectory),
+    );
+    // if (fs.existsSync(cacheDirPath)) {
+    //   fs.rmdirSync(cacheDirPath,  { recursive: true });
+    // }
    return {
      name: "vite-plugin-linaria-styled",
      load(id: string) {
@@ -47,9 +56,9 @@
        if (cssLookup.has(importee)) return importee;
      },
      // @ts-ignore
-     transform(code: string, id: string) {
+     transform(code: string, id: string) {                     
        // Do not transform ignored and generated files
-       if (!filter(id) || cssLookup.has(id)) return;      
+       if (!filter(id) || cssLookup.has(id) || !fileExtensionReg.test(id)) return;
        EvalCache.clearForFile(id);
        const result = transform(code, {
          filename: id,
